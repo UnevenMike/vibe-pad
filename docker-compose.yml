@@ -23,10 +23,10 @@ services:
     image: ghcr.io/unevenmike/vibe-pad:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`michaelbutterfield.dev`)"
-      - "traefik.http.routers.app.entrypoints=websecure"
-      - "traefik.http.routers.app.tls.certresolver=myresolver"
-      - "traefik.http.services.app.loadbalancer.server.port=3000" # ✅ Tell Traefik the correct port
+      - "traefik.http.routers.vibe-pad.rule=Host(`michaelbutterfield.dev`)"
+      - "traefik.http.routers.vibe-pad.entrypoints=websecure"
+      - "traefik.http.routers.vibe-pad.tls.certresolver=myresolver"
+      - "traefik.http.services.vibe-pad.loadbalancer.server.port=3000" # ✅ Tell Traefik the correct port
     container_name: vibe-pad
     environment:
       - DB_PATH=/data/notes.db
