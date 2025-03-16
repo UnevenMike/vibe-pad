@@ -15,7 +15,7 @@ services:
       - "443:443"
       - "8080:8080" # Traefik dashboard (optional)
     volumes:
-      - letsencrypt:/letsencrypt
+      - vibe-pad_letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
 
   app:
@@ -33,4 +33,4 @@ services:
       - ./data:/data
 
 volumes:
-  letsencrypt:
+  vibe-pad_letsencrypt:
