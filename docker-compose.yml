@@ -5,32 +5,22 @@ services:
       - "--api.insecure=true"
       - "--providers.docker"
       - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=michael@michaelbutterfield.dev"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entryPoints.web.address=:80"
     ports:
       - "80:80"
-      - "443:443"
       - "8080:8080"
     volumes:
-      - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
-  vibe-pad:
+
+  app:
     image: ghcr.io/unevenmike/vibe-pad:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.vibe-pad.rule=Host(`michaelbutterfield.dev`)"
-      - "traefik.http.routers.vibe-pad.entrypoints=websecure"
-      - "traefik.http.routers.vibe-pad.tls.certresolver=myresolver"
-      - "traefik.http.services.vibe-pad.loadbalancer.server.port=3000" # ✅ Tell Traefik the correct port
+      - "traefik.http.routers.app.rule=Host(`michaelbutterfield.dev`)"
+      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.services.app.loadbalancer.server.port=3000"
     container_name: vibe-pad
     environment:
       - DB_PATH=/data/notes.db
     volumes:
       - ./data:/data
-volumes:
-  letsencrypt:
