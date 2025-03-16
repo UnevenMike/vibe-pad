@@ -1,0 +1,10 @@
+services:
+  app:
+    image: ghcr.io/unevenmike/vibe-pad:latest
+    container_name: vibe-pad
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_PATH=/data/notes.db
+    volumes:
+      - ./data:/data
