@@ -23,9 +23,9 @@ services:
     image: ghcr.io/unevenmike/vibe-pad:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.vibe-pad.rule=Host(`michaelbutterfield.dev`)"
-      - "traefik.http.routers.vibe-pad.entrypoints=websecure"
-      - "traefik.http.routers.vibe-pad.tls.certresolver=myresolver"
+      - "traefik.http.routers.app.rule=Host(`michaelbutterfield.dev`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=myresolver"
     container_name: vibe-pad
     environment:
       - DB_PATH=/data/notes.db
