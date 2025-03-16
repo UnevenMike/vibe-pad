@@ -1,6 +1,10 @@
 # dependencies (bun install)
 node_modules
 
+*.db
+*.db-shm
+*.db-wal
+
 # output
 out
 dist

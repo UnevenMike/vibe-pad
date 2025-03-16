@@ -5,14 +5,18 @@
  * It is included in `src/index.html`.
  */
 
-import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import { App } from "./App";
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router";
+import { NotesProvider } from "./Context/NotesContext";
+import { router } from "./routes";
 
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <App />
+    <NotesProvider>
+      <RouterProvider router={router} />/
+    </NotesProvider>
   </StrictMode>
 );
 
