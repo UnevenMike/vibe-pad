@@ -19,7 +19,7 @@ services:
     volumes:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
-  app:
+  vibe-pad:
     image: ghcr.io/unevenmike/vibe-pad:latest
     labels:
       - "traefik.enable=true"
