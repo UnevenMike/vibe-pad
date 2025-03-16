@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import type { Note } from "@/server/notes";
+import { Home } from "lucide-react";
 import { NavLink } from "react-router";
 
 export function AppSidebar({ notes }: { notes: Note[] }) {
@@ -18,6 +19,16 @@ export function AppSidebar({ notes }: { notes: Note[] }) {
     <Sidebar>
       <SidebarHeader />
       <SidebarContent>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <NavLink to={`/app/`}>
+                <Home />
+                <span>Home</span>
+              </NavLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
         <SidebarGroup>
           <SidebarGroupLabel>Notes</SidebarGroupLabel>
           <SidebarGroupContent>

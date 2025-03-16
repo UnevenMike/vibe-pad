@@ -1,6 +1,6 @@
 import "@/../styles/globals.css";
-import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
         <div className="container flex h-16 items-center px-4">
           <div className="text-xl font-bold">VibePad</div>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <Link to="/login">
+            <Link to="/app">
               <Button variant="default">Login</Button>
             </Link>
           </nav>
@@ -29,7 +29,7 @@ export default function HomePage() {
                   storage for speed and reliability.
                 </p>
                 <div className="flex flex-col gap-2 sm:flex-row">
-                  <Link to="/login">
+                  <Link to="/app">
                     <Button size="lg" className="w-full sm:w-auto">
                       Get Started
                     </Button>

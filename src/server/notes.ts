@@ -1,6 +1,7 @@
 import Database from "bun:sqlite";
 
-export const db = new Database("notes.db", { strict: true });
+const dbPath = process.env.DB_PATH || "notes.db";
+export const db = new Database(dbPath, { strict: true });
 
 export type Note = {
   id: number;
