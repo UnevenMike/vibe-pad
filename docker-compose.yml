@@ -1,10 +1,36 @@
 services:
+  reverse-proxy:
+    image: traefik:v3.3
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=michael@michaelbutterfield.dev"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # Traefik dashboard (optional)
+    volumes:
+      - letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+
   app:
     image: ghcr.io/unevenmike/vibe-pad:latest
     container_name: vibe-pad
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`michaelbutterfield.dev`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=myresolver"
+      - "traefik.http.services.app.loadbalancer.server.port=3000"
     environment:
       - DB_PATH=/data/notes.db
     volumes:
       - ./data:/data
-    ports:
-      - "3000:3000" # ✅ Expose port 3000 to the host
+
+volumes:
+  letsencrypt:
