@@ -31,4 +31,4 @@ services:
       - ./data:/data
 
 volumes:
-  vibe-pad_letsencrypt:
+  letsencrypt:
