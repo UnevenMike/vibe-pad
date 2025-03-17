@@ -1,6 +1,6 @@
 // src/client/hooks/useNotes.ts
 import type { Note } from "@/server/notes";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Message =
   | { type: "NEW_NOTE"; note: Note }
@@ -21,7 +21,8 @@ export function useNotes() {
 
   // Set up WebSocket connection for real-time updates
   useEffect(() => {
-    const socket = new WebSocket(`ws://${window.location.host}/ws`);
+    const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+    const socket = new WebSocket(`${protocol}${window.location.host}`);
     wsRef.current = socket;
 
     socket.onmessage = (event) => {
